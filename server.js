@@ -62,6 +62,6 @@ app.get('/:crnVal', function(req, res){
 	})
 })
 
-app.listen('8081')
-console.log('Magic happens on port 8081');
+app.set('port', process.env.PORT || 3000);
+app.listen(app.get('port'))
 exports = module.exports = app; 
