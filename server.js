@@ -7,9 +7,16 @@ var app     = express();
 
 app.get('/:crnVal', function(req, res){
 	
-        var search = req.params.crnVal;
-        console.log(search); 
-                    request.post({url:'https://banweb.banner.vt.edu/ssb/prod/HZSKVTSC.P_ProcRequest', form: {CRN : search, TERMYEAR: '201509', CAMPUS: '0', SCHDTYPE: '%', SUBJ_CODE: '%', CORE_CODE: 'AR%', PRINT_FRIEND: 'Y', history: 'N', BTN_PRESSED: 'Printer+Friendly+List'}}, function(error, response, html){
+        //var search = req.params.crnVal;
+        fs.writeFile('output.json', 'test', function (err) {
+
+});
+        var i;
+    console.log("test");
+        for(i = 80000; i <= 80100; i++) {
+            
+        console.log(i); 
+                    request.post({url:'https://banweb.banner.vt.edu/ssb/prod/HZSKVTSC.P_ProcRequest', form: {CRN : i, TERMYEAR: '201509', CAMPUS: '0', SCHDTYPE: '%', SUBJ_CODE: '%', CORE_CODE: 'AR%', PRINT_FRIEND: 'Y', history: 'N', BTN_PRESSED: 'Printer+Friendly+List'}}, function(error, response, html){
 		if(!error){
 			var $ = cheerio.load(html);
 
@@ -49,19 +56,29 @@ app.get('/:crnVal', function(req, res){
                 
                 count++;
             });
-                                        
             
+            if(json.crn != '') {
+            fs.appendFile('output.json', JSON.stringify(json, null, 4), function(err){
+            
+            console.log("Done"); 
+//        	console.log('File successfully written! - Check your project directory for the output.json file');
+        })
+            }
 	      
 		}
 
 //		fs.writeFile('output.json', JSON.stringify(json, null, 4), function(err){
 //        	console.log('File successfully written! - Check your project directory for the output.json file');
 //        })
-
-        res.send(json)
+                        
+        
+                    
+        //res.send(json)
 	})
+    }
 })
 
 app.set('port', process.env.PORT || 3000);
 app.listen(app.get('port'))
+console.log("Running"); 
 exports = module.exports = app; 
