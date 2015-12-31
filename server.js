@@ -7,12 +7,12 @@ var app     = express();
 
 app.get('/:crnVal', function(req, res){
 	
-        //var search = req.params.crnVal;
+
         fs.writeFile('output.json', 'test', function (err) {
 
-});
+        });
         var i;
-    console.log("test");
+    
         for(i = 80000; i <= 80100; i++) {
             
         console.log(i); 
@@ -58,23 +58,17 @@ app.get('/:crnVal', function(req, res){
             });
             
             if(json.crn != '') {
-            fs.appendFile('output.json', JSON.stringify(json, null, 4), function(err){
-            
-            console.log("Done"); 
-//        	console.log('File successfully written! - Check your project directory for the output.json file');
-        })
+                fs.appendFile('output.json', JSON.stringify(json, null, 4), function(err){
+                
+                console.log("Done"); 
+            })
+
             }
 	      
 		}
 
-//		fs.writeFile('output.json', JSON.stringify(json, null, 4), function(err){
-//        	console.log('File successfully written! - Check your project directory for the output.json file');
-//        })
-                        
-        
-                    
-        //res.send(json)
-	})
+
+	   })
     }
 })
 
